@@ -62,9 +62,11 @@ int main()
 	vector<thread>V;
 	int threads[threads_num] = { 1, 2, 4, 8, 16 };
 	double time[threads_num][vnums] = {0};
-	mt19937 gen;
+
+	random_device rd;
+	mt19937 gen(rd());
 	uniform_int_distribution<int> dist(0, 255);
-	auto rand_num([=]() mutable {return dist(gen); });
+	auto rand_num([&]() mutable {return dist(gen); });
 	generate(v1.begin(), v1.end(), rand_num);
 	generate(v2.begin(), v2.end(), rand_num);
 
